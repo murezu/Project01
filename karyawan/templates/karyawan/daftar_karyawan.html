@@ -1,0 +1,60 @@
+{% extends "karyawan/home.html" %}
+
+
+{% block content %}
+<div class="main">
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="md-col-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Data Karyawan</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-hover">
+                                <thead class="border-bottom font-weight-bold">
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>Nama Lengkap</td>
+                                        <td>Alamat</td>
+                                        <td>Nomor Hp</td>
+                                        <td>Jabatan</td>
+                                        <td>Aksi</td>
+                                        <td>
+                                            <a href="{% url 'karyawan_insert' %}" class="btn btn-default">
+                                                <i class="fa fa-plus-square"></i> Tambah Karyawan
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for karyawan in daftar_karyawan %}
+                                        <tr>
+                                            <td>{{karyawan.id}}</td>
+                                            <td>{{karyawan.fullname}}</td>
+                                            <td>{{karyawan.alamat}}</td>
+                                            <td>{{karyawan.no_hp}}</td>
+                                            <td>{{karyawan.jabatan}}</td>
+                                            <td>
+                                                <a href="{% url 'karyawan_update' karyawan.id %}">
+                                                    <button type="button" class="btn btn-primary">Edit</button>
+                                                </a>
+                                                <form action="{% url 'karyawan_delete' karyawan.id %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-danger" data-message="Data telah terhapus" data-position="top-right" onclick="return confirm('Anda yakin untuk menghapus data ini ?');"><i class="fa fa-trash-o"></i>Hapus</button>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

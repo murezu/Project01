@@ -1,0 +1,37 @@
+{% extends "karyawan/home.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="main">
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="md-col-12">
+<form action="" method="post" autocomplete="off"><!-- autocomplete="on" -->
+	{%csrf_token%}
+	{{form.fullname|as_crispy_field}}
+	{{form.alamat|as_crispy_field}}
+	<div class="row">
+		<div class="col-md-4">
+			{{form.no_hp|as_crispy_field}}
+		</div>
+		<div class="col-md-4">
+			{{form.jabatan|as_crispy_field}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+			<button type="submit" class="btn btn-success btn-block btn-lg">Submit</button>
+		</div>
+		<div class="col-md-4">
+			<a href="{% url 'daftar_karyawan' %}" class="btn btn-secondary btn-block btn-lg">Back
+			</a>
+		</div>
+	</div>
+	</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}
